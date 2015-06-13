@@ -1,57 +1,62 @@
-//import java.io.FileNotFoundException;
-//import java.io.FileOutputStream;
-//import java.io.IOException;
-//import java.io.ObjectOutputStream;
-//import java.util.ArrayList;
-//import java.util.Collections;
-//import java.util.Comparator;
-//import java.util.List;
-//
-//
-//public class Config {
-//	
-//		  public static void main(String[] args){
-//				List<Wyniki> wyniki = new ArrayList<>();
-//			
-//
-//			wyniki.add(new Wyniki("�ukasz", 100));
-//			wyniki.add(new Wyniki("Kasia", 510));
-//			wyniki.add(new Wyniki("Janek", 52));
-//			wyniki.add(new Wyniki("Zosia", 1090));
-//			wyniki.add(new Wyniki("Jamnik", 222));
-////			wyniki.add(new Wyniki()) -- dodany ten co go zapisujemy
-//
-//			Collections.sort(wyniki, new Comparator<Wyniki>() {
-//
-//				public int compare(Wyniki w1, Wyniki w2) {
-//					if (w1.getWynik() > w2.getWynik()) {
-//						return -1;
-//					} else if (w1.getWynik() < w2.getWynik()) {
-//						return 1;
-//					}
-//					return 0;
-//				}
-//			
-//				
-//				
-//			});
-//			System.out.println(wyniki);
-//			try (ObjectOutputStream os = new ObjectOutputStream(
-//					new FileOutputStream("wyniki.txt"))) {
-//
-//				for (Wyniki wynik : wyniki) {
-//					os.writeObject(wynik);
-//				}
-//				
-//				os.close();
-//			} catch (FileNotFoundException e) {
-//				System.out.println("Nie znaleziono pliku");
-//			} catch (IOException e1) {
-//				// TODO Auto-generated catch block
-//				e1.printStackTrace();
-//			}
-//		
-//		}
-//
-//
-//}
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.List;
+import java.util.Scanner;
+import java.util.Vector;
+
+import ListaPlansz.WczytajListePlansz;
+
+
+/**
+ * Konfiguracja gry. Konstruktor wczytuje z pliku.
+ * 
+ * @author Maurycy
+ * 
+ */
+public class Config {
+
+	private final int liczbaZyc;
+	private final int punktyZaWybuch;
+	private final List<ListaPlansz> listaPoziomow;
+
+	/**
+	 * Wczytuje dane z pliku konfiguracyjnego i zleca ztworzenie modeli wszytkich plansz.
+	 * @param configFileName - pliku konfiguracyjny.
+	 * @throws FileNotFoundException  - jeœli nie ma pliku.
+	 */
+	public Config(String configFileName)
+			throws FileNotFoundException {
+		Scanner skaner = new Scanner(new File(configFileName));
+		if (!skaner.hasNext()) {
+			skaner.close();
+			throw new FileNotFoundException("nie znaleziono pliku");
+		}
+		liczbaZyc = skaner.nextInt();
+		punktyZaWybuch = skaner.nextInt();
+		listaPoziomow = new Vector<>();
+		skaner.next(WczytajListePlansz.boardLimiter);
+		WczytajListePlansz listaPlansz = new WczytajListePlansz(skaner, punktyZaWybuch);
+		while (skaner.hasNext()) {
+			listaPoziomow.add(listaPlansz.getNextBoard());
+		}
+		skaner.close();
+	}
+
+	
+	
+	/**
+	 * Zwraca liczbê ¿yæ.
+	 * @return - liczba ¿yæ.
+	 */
+	public int getLiczbaZyc() {
+		return liczbaZyc;
+	}
+
+	/**
+	 *  Zwraca listê modeli plansz.
+	 * @return - lista modeli plansz.
+	 */
+	public List<ListaPlansz> getLevelsList() {
+		return listaPoziomow;
+	}
+}
