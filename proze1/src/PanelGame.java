@@ -8,6 +8,7 @@ import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Random;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
@@ -23,22 +24,21 @@ public class PanelGame extends JPanel implements MouseListener,
 	private int posY1;
 	private int posX2;
 	private int posY2;
-	Ball ball1 = new Ball();
-	Ball ball2 = new Ball();
-	private ViewInfo nowaTablica;
-	
-
+	Ball ball1;
+	Ball ball2;
 	
 	public PanelGame() {
 		try {
 			setSize(600, 600);
 			background = ImageIO.read(new File("background.png"));
-
+			
 		} catch (IOException e) {
 			System.out.println("Image not found");
 		}
 
 	}
+
+
 
 	@Override
 	public void paintComponent(Graphics g) {
@@ -46,9 +46,14 @@ public class PanelGame extends JPanel implements MouseListener,
 		int newBallWidth = getWidth() / 10;
 
 		for (int j = 0; j < getHeight() / newBallHeight; j++)
-			for (int i = 0; i < getWidth() / newBallWidth; i++) {
-				Ball ball = new Ball();
-				nowaTablica.getNewTable()[i][j] = ball.getBallType();
+			for (int i = 0; i < getWidth() / newBallWidth; i++) 
+			{
+				Random rand = new Random();
+				 ViewInfo tablicaZKulkami = new ViewInfo();
+				tablicaZKulkaminew.getNewTable()[i][j].getByInt(rand.nextInt(4) + 2);
+				
+				
+				tablicaKulek[i][j] = new Ball(tablicaZKulkami);
 
 				g.drawImage(tablicaKulek[i][j].getImg(), newBallWidth * i,
 						newBallHeight * j, newBallWidth * (i + 1),

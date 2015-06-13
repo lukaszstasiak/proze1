@@ -9,17 +9,11 @@ import javax.imageio.ImageIO;
 
 public class Ball {
 
-
-	private BallType ballType;
-	
 	private BufferedImage img = null;
 
-	Ball() {
+	Ball(BallType ballType) {
 
-		Random rand = new Random();
-		
-		
-		switch (BallType.getByInt(rand.nextInt(4) + 2)) {
+		switch (ballType) {
 		case RED:
 			try {
 				img = ImageIO.read(new File(
@@ -56,10 +50,6 @@ public class Ball {
 
 	public BufferedImage getImg() {
 		return img;
-	}
-
-	public BallType getBallType() {
-		return ballType;
 	}
 
 }
