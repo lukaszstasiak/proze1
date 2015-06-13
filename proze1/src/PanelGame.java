@@ -1,3 +1,6 @@
+import info.BallType;
+import info.ViewInfo;
+
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -22,6 +25,8 @@ public class PanelGame extends JPanel implements MouseListener,
 	private int posY2;
 	Ball ball1 = new Ball();
 	Ball ball2 = new Ball();
+	private ViewInfo nowaTablica;
+	
 
 	
 	public PanelGame() {
@@ -42,7 +47,8 @@ public class PanelGame extends JPanel implements MouseListener,
 
 		for (int j = 0; j < getHeight() / newBallHeight; j++)
 			for (int i = 0; i < getWidth() / newBallWidth; i++) {
-				tablicaKulek[i][j] = new Ball();
+				Ball ball = new Ball();
+				nowaTablica.getNewTable()[i][j] = ball.getBallType();
 
 				g.drawImage(tablicaKulek[i][j].getImg(), newBallWidth * i,
 						newBallHeight * j, newBallWidth * (i + 1),
@@ -77,12 +83,12 @@ public class PanelGame extends JPanel implements MouseListener,
 		ball2 = getTablicaKulek(posX2, posY2);
 	}
 
-	public boolean czyMoznaZamienicMiejscami(Ball kula1, Ball kula2) {
-		
-		if ( ball1 = getTablicaKulek(posX2 +1+, posY2)){
-			
-		}
-	}
+//	public boolean czyMoznaZamienicMiejscami(Ball kula1, Ball kula2) {
+//		
+//		if ( ball1 = getTablicaKulek(posX2 +1+, posY2)){
+//			
+//		}
+//	}
 
 	@Override
 	public void mouseDragged(MouseEvent arg0) {

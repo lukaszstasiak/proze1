@@ -1,3 +1,5 @@
+import info.BallType;
+
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -7,22 +9,25 @@ import javax.imageio.ImageIO;
 
 public class Ball {
 
-	private int ballIndex;
+
+	private BallType ballType;
+	
 	private BufferedImage img = null;
 
 	Ball() {
 
 		Random rand = new Random();
-		ballIndex = rand.nextInt(4) + 1;
-		switch (ballIndex) {
-		case 1:
+		
+		
+		switch (BallType.getByInt(rand.nextInt(4) + 2)) {
+		case RED:
 			try {
 				img = ImageIO.read(new File(
 						"C:/Users/Lukasz/workspace/proze1/reddot.jpg"));
 			} catch (IOException e) {
 			}
 			break;
-		case 2:
+		case GREEN:
 
 			try {
 				img = ImageIO.read(new File(
@@ -30,19 +35,21 @@ public class Ball {
 			} catch (IOException e) {
 			}
 			break;
-		case 3:
+		case YELLOW:
 			try {
 				img = ImageIO.read(new File(
 						"C:/Users/Lukasz/workspace/proze1/yellowdot.jpg"));
 			} catch (IOException e) {
 			}
 			break;
-		case 4:
+		case BLUE:
 			try {
 				img = ImageIO.read(new File(
 						"C:/Users/Lukasz/workspace/proze1/bluedot.jpg"));
 			} catch (IOException e) {
 			}
+		case DESTROYED:
+			break;
 		}
 
 	}
@@ -51,8 +58,8 @@ public class Ball {
 		return img;
 	}
 
-	public int getBallIndex() {
-		return ballIndex;
+	public BallType getBallType() {
+		return ballType;
 	}
 
 }
