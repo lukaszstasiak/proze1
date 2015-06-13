@@ -50,10 +50,11 @@ public class PanelGame extends JPanel implements MouseListener,
 			{
 				Random rand = new Random();
 				 ViewInfo tablicaZKulkami = new ViewInfo();
-				tablicaZKulkaminew.getNewTable()[i][j].getByInt(rand.nextInt(4) + 2);
+				
+//						.getByInt(rand.nextInt(4) + 2);
 				
 				
-				tablicaKulek[i][j] = new Ball(tablicaZKulkami);
+				tablicaKulek[i][j] = new Ball(tablicaZKulkami.getNewTable()[i][j].getByInt(rand.nextInt(4) + 2));
 
 				g.drawImage(tablicaKulek[i][j].getImg(), newBallWidth * i,
 						newBallHeight * j, newBallWidth * (i + 1),
