@@ -13,13 +13,17 @@ import java.util.Random;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+import logic.Map;
+
 public class PanelGame extends JPanel implements MouseListener,
 		MouseMotionListener {
 
 	private static final long serialVersionUID = 1L;
 	public static BufferedImage background;
-
-	private Ball[][] tablicaKulek = new Ball[10][10];
+	
+	private Map map;
+	private ViewInfo viewInfo;
+	
 	private int posX1;
 	private int posY1;
 	private int posX2;
@@ -28,6 +32,8 @@ public class PanelGame extends JPanel implements MouseListener,
 	Ball ball2;
 	
 	public PanelGame() {
+		map  = new Map(10,10);
+		viewInfo = map.getViewInfo();
 		try {
 			setSize(600, 600);
 			background = ImageIO.read(new File("background.png"));
@@ -44,28 +50,38 @@ public class PanelGame extends JPanel implements MouseListener,
 	public void paintComponent(Graphics g) {
 		int newBallHeight = getHeight() / 10;
 		int newBallWidth = getWidth() / 10;
+		
+		viewInfo = map.getViewInfo();
+		
+		// STILL TODO!
+		// WARNING: CODE IS IN ALPHA PHASE LOL!
+		
+		BallType kulkiPlaceholder[][] = viewInfo.getNewTable();
 
 		for (int j = 0; j < getHeight() / newBallHeight; j++)
 			for (int i = 0; i < getWidth() / newBallWidth; i++) 
 			{
-				Random rand = new Random();
-				 ViewInfo tablicaZKulkami = new ViewInfo();
-				
-//						.getByInt(rand.nextInt(4) + 2);
-				
-				
-				tablicaKulek[i][j] = new Ball(tablicaZKulkami.getNewTable()[i][j].getByInt(rand.nextInt(4) + 2));
-
-				g.drawImage(tablicaKulek[i][j].getImg(), newBallWidth * i,
+//				Random rand = new Random();
+//				 ViewInfo tablicaZKulkami = new ViewInfo();
+//				
+////						.getByInt(rand.nextInt(4) + 2);
+//				
+//				
+//				tablicaKulek[i][j] = new Ball(tablicaZKulkami.getNewTable()[i][j].getByInt(rand.nextInt(4) + 2));
+//
+				Ball ball = new Ball(kulkiPlaceholder[j][i]);
+				g.drawImage(ball.getImg(), newBallWidth * i,
 						newBallHeight * j, newBallWidth * (i + 1),
 						newBallHeight * (j + 1), 0, 0, 40, 40, null);
+				
+				
 
 			}
 	}
 
-	public Ball getTablicaKulek(int x, int y) {
-		return tablicaKulek[x][y];
-	}
+//	public Ball getTablicaKulek(int x, int y) {
+//		return tablicaKulek[x][y];
+//	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
@@ -75,7 +91,7 @@ public class PanelGame extends JPanel implements MouseListener,
 		posX1 = (int)(Math.floor(x / (getWidth() / 10)));
 		posY1 = (int)(Math.floor(y / (getHeight() / 10)));
 		
-		ball1 = getTablicaKulek(posX1, posY1);
+		//ball1 = getTablicaKulek(posX1, posY1);
 	}
 
 	@Override
@@ -86,7 +102,7 @@ public class PanelGame extends JPanel implements MouseListener,
 		posX2 = (int)(Math.floor(x / (getWidth() / 10)));
 		posY2 = (int)(Math.floor(y / (getHeight() / 10)));
 		
-		ball2 = getTablicaKulek(posX2, posY2);
+		//ball2 = getTablicaKulek(posX2, posY2);
 	}
 
 //	public boolean czyMoznaZamienicMiejscami(Ball kula1, Ball kula2) {

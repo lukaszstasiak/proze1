@@ -5,6 +5,7 @@ public class ViewInfo
 	private BallType[][] oldTable;
 	private BallType[][] afterExplosionTable;
 	private BallType[][] newTable;
+	
 	public BallType[][] getOldTable()
 	{
 		return oldTable;
