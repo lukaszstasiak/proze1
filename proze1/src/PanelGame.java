@@ -73,9 +73,6 @@ public class PanelGame extends JPanel implements MouseListener,
 				g.drawImage(ball.getImg(), newBallWidth * i,
 						newBallHeight * j, newBallWidth * (i + 1),
 						newBallHeight * (j + 1), 0, 0, 40, 40, null);
-				
-				
-
 			}
 	}
 

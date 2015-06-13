@@ -17,7 +17,7 @@ public class Ball {
 		case RED:
 			try {
 				img = ImageIO.read(new File(
-						"C:/Users/Lukasz/workspace/proze1/reddot.jpg"));
+						"reddot.jpg"));
 			} catch (IOException e) {
 			}
 			break;
@@ -25,21 +25,21 @@ public class Ball {
 
 			try {
 				img = ImageIO.read(new File(
-						"C:/Users/Lukasz/workspace/proze1/greendot.jpg"));
+						"greendot.jpg"));
 			} catch (IOException e) {
 			}
 			break;
 		case YELLOW:
 			try {
 				img = ImageIO.read(new File(
-						"C:/Users/Lukasz/workspace/proze1/yellowdot.jpg"));
+						"yellowdot.jpg"));
 			} catch (IOException e) {
 			}
 			break;
 		case BLUE:
 			try {
 				img = ImageIO.read(new File(
-						"C:/Users/Lukasz/workspace/proze1/bluedot.jpg"));
+						"bluedot.jpg"));
 			} catch (IOException e) {
 			}
 		case DESTROYED:
