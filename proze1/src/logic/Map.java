@@ -103,11 +103,42 @@ public class Map
 	{
 		ArrayList<GameBall> destroyedBalls = new ArrayList<GameBall>();
 		Set<GameBall> set = new HashSet<GameBall>();
+		Set<GameBall> temp = new HashSet<GameBall>();
 		
-		set.addAll(getVerticalLine(x1).getBallsToDestroy(y1));
-		set.addAll(getVerticalLine(x2).getBallsToDestroy(y2));
-		set.addAll(getHorizontalLine(y1).getBallsToDestroy(x1));
-		set.addAll(getHorizontalLine(y2).getBallsToDestroy(x2));
+		
+		temp.addAll(getVerticalLine(x1).getBallsToDestroy(y1));
+		System.out.println("Pion: " + x1);
+		for(GameBall b: temp)
+		{
+			System.out.println(b.getBallType());
+		}
+		set.addAll(temp);
+		temp.clear();
+	
+		temp.addAll(getVerticalLine(x2).getBallsToDestroy(y2));
+		System.out.println("Pion: " + x2);
+		for(GameBall b: temp)
+		{
+			System.out.println(b.getBallType());
+		}
+		set.addAll(temp);
+		temp.clear();
+		temp.addAll(getHorizontalLine(y1).getBallsToDestroy(x1));
+		System.out.println("Poziom: " + y1);
+		for(GameBall b: temp)
+		{
+			System.out.println(b.getBallType());
+		}
+		set.addAll(temp);
+		temp.clear();
+		temp.addAll(getHorizontalLine(y2).getBallsToDestroy(x2));
+		System.out.println("Poziom: " + y2);
+		for(GameBall b: temp)
+		{
+			System.out.println(b.getBallType());
+		}
+		set.addAll(temp);
+		temp.clear();
 		
 		destroyedBalls.addAll(set);
 		

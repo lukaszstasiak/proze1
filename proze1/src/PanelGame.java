@@ -57,7 +57,7 @@ public class PanelGame extends JPanel implements MouseListener,
 		// STILL TODO!
 		// WARNING: CODE IS IN ALPHA PHASE LOL!
 		
-		BallType kulkiPlaceholder[][] = viewInfo.getNewTable();
+		BallType kulkiPlaceholder[][] = viewInfo.getAfterExplosionTable();
 
 		for (int j = 0; j < getHeight() / newBallHeight; j++)
 			for (int i = 0; i < getWidth() / newBallWidth; i++) 
