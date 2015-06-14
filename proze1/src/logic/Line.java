@@ -28,7 +28,7 @@ public class Line
 		balls.add(0, ball);
 	}
 	
-	public ArrayList<GameBall> getBallsToDestroy()
+	public ArrayList<GameBall> getBallsToDestroy(int pos)
 	{
 		ArrayList<GameBall> result = new ArrayList<GameBall>();
 		ArrayList<GameBall> temp = new ArrayList<GameBall>();
@@ -43,7 +43,10 @@ public class Line
 			{
 				if(temp.size() >= 3)
 				{
-					result.addAll(temp);
+					if(temp.contains(getBall(pos)))
+					{
+						result.addAll(temp);
+					}
 				}
 				temp.clear();
 				oldType = currentType;
@@ -52,7 +55,10 @@ public class Line
 		}
 		if(temp.size() >= 3)
 		{
-			result.addAll(temp);
+			if(temp.contains(getBall(pos)))
+			{
+				result.addAll(temp);
+			}
 		}
 		return result;
 	}
@@ -78,7 +84,7 @@ public class Line
 	
 	public GameBall getBall(int pos)
 	{
-		return balls.get(pos-1);
+		return balls.get(pos);
 	}
 	
 	public void removeDestroyed()
@@ -88,7 +94,10 @@ public class Line
 		for(GameBall ball: balls)
 		{
 			if(ball.isDestroyed())
+			{
+				System.out.println("isDestroyed!");
 				toDestroy.add(ball);
+			}
 		}
 		
 		balls.removeAll(toDestroy);

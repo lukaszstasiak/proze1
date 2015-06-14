@@ -49,10 +49,13 @@ public class Map
 				horizontalLines.get(line.getIndex(ball)).addBall(ball);
 			}
 		}
+		
+		
 	}
 		
 	private void spawnNewBalls()
 	{
+		System.out.println("spawning new balls!");
 		for(Line line: verticalLines)
 		{
 			line.removeDestroyed();
@@ -66,36 +69,46 @@ public class Map
 	
 	private Line getHorizontalLine(int pos)
 	{
-		return horizontalLines.get(pos-1);
+		return horizontalLines.get(pos);
 	}
 	
-	private void replaceBalls(int firstBallX, int firstBallY, int secondBallX, int secondBallY)
+	private Line getVerticalLine(int pos)
+	{
+		return verticalLines.get(pos);
+	}
+	
+	private boolean replaceBalls(int firstBallX, int firstBallY, int secondBallX, int secondBallY)
 	{
 		GameBall firstBall = getHorizontalLine(firstBallY).getBall(firstBallX);
 		GameBall secondBall = getHorizontalLine(secondBallY).getBall(secondBallX);
-		GameBall hold = firstBall;
-		hold = firstBall;
-		firstBall = secondBall;
-		secondBall = hold;
+		if(firstBall.getBallType().getInt() == secondBall.getBallType().getInt())
+			return false;
+		System.out.println("First type: " + firstBall.getBallType());
+		System.out.println(firstBallX + " " + firstBallY);
+		System.out.println("Second type: " + secondBall.getBallType());
+		System.out.println(secondBallX + " " + secondBallY);
+//		GameBall hold = firstBall;
+//		hold = firstBall;
+//		firstBall = secondBall;
+//		secondBall = hold;
+		
+		BallType hold = firstBall.getBallType();
+		firstBall.setBallType(secondBall.getBallType());
+		secondBall.setBallType(hold);
+		
+		return true;
 	}
 	
-	private ArrayList<GameBall> getDestroyedBalls()
+	private ArrayList<GameBall> getDestroyedBalls(int x1, int y1, int x2, int y2)
 	{
 		ArrayList<GameBall> destroyedBalls = new ArrayList<GameBall>();
 		Set<GameBall> set = new HashSet<GameBall>();
 		
-		for(Line line: verticalLines)
-		{
-			ArrayList<GameBall> destroyedBallsInLine = line.getBallsToDestroy();
-			if(!destroyedBallsInLine.isEmpty())
-				set.addAll(destroyedBallsInLine);
-		}
-		for(Line line: horizontalLines)
-		{
-			ArrayList<GameBall> destroyedBallsInLine = line.getBallsToDestroy();
-			if(!destroyedBallsInLine.isEmpty())
-				set.addAll(destroyedBallsInLine);
-		}
+		set.addAll(getVerticalLine(x1).getBallsToDestroy(y1));
+		set.addAll(getVerticalLine(x2).getBallsToDestroy(y2));
+		set.addAll(getHorizontalLine(y1).getBallsToDestroy(x1));
+		set.addAll(getHorizontalLine(y2).getBallsToDestroy(x2));
+		
 		destroyedBalls.addAll(set);
 		
 		return destroyedBalls;
@@ -103,7 +116,7 @@ public class Map
 	
 	private void markDestroyedBalls(ArrayList<GameBall> destroyedBalls)
 	{
-		/*for(Line line: horizontalLines)
+		for(Line line: horizontalLines)
 		{
 			ArrayList<GameBall> balls = line.getBalls();
 			for(GameBall ball: balls)
@@ -113,12 +126,12 @@ public class Map
 					ball.setBallType(BallType.DESTROYED);
 				}
 			}
-		}*/
+		}
 		
-		for(GameBall ball: destroyedBalls)
+		/*for(GameBall ball: destroyedBalls)
 		{
 			ball.setBallType(BallType.DESTROYED);
-		}
+		}*/
 	}
 	
 	private BallType[][] getInfoTable()
@@ -158,16 +171,28 @@ public class Map
 	
 	public boolean move(int firstBallX, int firstBallY, int secondBallX, int secondBallY)
 	{
-		replaceBalls(firstBallX,firstBallY,secondBallX,secondBallY);
+		if(Math.abs(firstBallX - secondBallX) > 1 || Math.abs(firstBallY - secondBallY) > 1)
+			return false;
+		if(firstBallX != secondBallX && firstBallY != secondBallY)
+			return false;
+		if(firstBallX == secondBallX && firstBallY == secondBallY)
+			return false;
+				
+		// Same color ?
+		boolean colorTest = replaceBalls(firstBallX,firstBallY,secondBallX,secondBallY);
+		if(colorTest == false)
+			return false;
 		
-		ArrayList<GameBall> destroyedBalls = getDestroyedBalls();
+		ArrayList<GameBall> destroyedBalls = getDestroyedBalls(firstBallX,firstBallY,secondBallX,secondBallY);
 		if(destroyedBalls.isEmpty())
 		{
+			System.out.println("Empty :C");
 			replaceBalls(firstBallX,firstBallY,secondBallX,secondBallY);
 			return false;
 		}
 		else
 		{
+			System.out.println("Not empty?! :C");
 			update(destroyedBalls);
 			return true;
 		}

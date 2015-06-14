@@ -32,6 +32,7 @@ public class PanelGame extends JPanel implements MouseListener,
 	Ball ball2;
 	
 	public PanelGame() {
+		addMouseListener(this);
 		map  = new Map(10,10);
 		viewInfo = map.getViewInfo();
 		try {
@@ -48,10 +49,10 @@ public class PanelGame extends JPanel implements MouseListener,
 
 	@Override
 	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
 		int newBallHeight = getHeight() / 10;
 		int newBallWidth = getWidth() / 10;
 		
-		viewInfo = map.getViewInfo();
 		
 		// STILL TODO!
 		// WARNING: CODE IS IN ALPHA PHASE LOL!
@@ -69,7 +70,7 @@ public class PanelGame extends JPanel implements MouseListener,
 //				
 //				tablicaKulek[i][j] = new Ball(tablicaZKulkami.getNewTable()[i][j].getByInt(rand.nextInt(4) + 2));
 //
-				Ball ball = new Ball(kulkiPlaceholder[j][i]);
+				Ball ball = new Ball(kulkiPlaceholder[i][j]);
 				g.drawImage(ball.getImg(), newBallWidth * i,
 						newBallHeight * j, newBallWidth * (i + 1),
 						newBallHeight * (j + 1), 0, 0, 40, 40, null);
@@ -84,7 +85,6 @@ public class PanelGame extends JPanel implements MouseListener,
 	public void mousePressed(MouseEvent e) {
 		int x = e.getX();
 		int y = e.getY();
-
 		posX1 = (int)(Math.floor(x / (getWidth() / 10)));
 		posY1 = (int)(Math.floor(y / (getHeight() / 10)));
 		
@@ -100,6 +100,9 @@ public class PanelGame extends JPanel implements MouseListener,
 		posY2 = (int)(Math.floor(y / (getHeight() / 10)));
 		
 		//ball2 = getTablicaKulek(posX2, posY2);
+		map.move(posX1, posY1, posX2, posY2);
+		viewInfo = map.getViewInfo();
+		repaint();
 	}
 
 //	public boolean czyMoznaZamienicMiejscami(Ball kula1, Ball kula2) {
