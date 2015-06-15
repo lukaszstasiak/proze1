@@ -26,8 +26,11 @@ public class Interfejs extends JFrame {
 	
 	private JPanel contentPane;
 	public static BufferedImage image;
-//	private Board board;
-	private Map map;
+	//private Board board;
+	//private Map map;
+	
+	private PanelGame panelGry;
+	private RightGamePanel panelWyniku;
 	
 	private Score obecnyWynik;
 
@@ -94,8 +97,8 @@ public class Interfejs extends JFrame {
 				JSplitPane jsp = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
 				jsp.setDividerSize(0);
 				
-				PanelGame panelGry = new PanelGame();
-				RightGamePanel panelWyniku = new RightGamePanel(panelGry.getMap().getPunkty(), nazwaUzytkownika);
+				panelGry = new PanelGame();
+				panelWyniku = new RightGamePanel(panelGry.getMap().getPunkty(), nazwaUzytkownika);
 				
 				jsp.add(panelGry);
 				jsp.add(panelWyniku);
@@ -171,5 +174,10 @@ public class Interfejs extends JFrame {
 
 	public Score getObecnyWynik() {
 		return obecnyWynik;
+	}
+	
+	public void undoButtonPressed()
+	{
+		panelGry.undoMovement();
 	}
 }

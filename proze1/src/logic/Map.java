@@ -180,10 +180,46 @@ public class Map {
 
 		return infoTable;
 	}
+	
+	private void loadFromInfoTable(BallType[][] infoTable)
+	{
+		// Clean up
+		for (Line line : horizontalLines) {
+			line.clear();
+		}
+		
+		for (Line line : verticalLines) {
+			line.clear();
+		}
+		
+		// Load to vertical
+		int idx = 0;
+		for(Line line: verticalLines)
+		{
+			for(int i = 0; i<sizeY;i++)
+			{
+				line.addBall(new GameBall(infoTable[idx][i]));
+			}
+			idx++;
+		}
+		
+		// Update horizontal references
+		updateHorizontalLines();
+		// Reset ViewInfo data
+		viewInfo.setOldTable(getInfoTable());
+		viewInfo.setAfterExplosionTable(getInfoTable());
+		viewInfo.setNewTable(getInfoTable());
+	}
+	
+	public void undoMovement()
+	{
+		loadFromInfoTable(viewInfo.getOldTable());
+	}
 
 	private void update(ArrayList<GameBall> destroyedBalls) {
+		BallType[][] oldTable = viewInfo.getOldTable();
 		viewInfo = new ViewInfo();
-		viewInfo.setOldTable(viewInfo.getNewTable());
+		viewInfo.setOldTable(oldTable);
 		markDestroyedBalls(destroyedBalls);
 		viewInfo.setAfterExplosionTable(getInfoTable());
 		spawnNewBalls();

@@ -56,7 +56,7 @@ public class PanelGame extends JPanel implements MouseListener,
 		int newBallWidth = getWidth() / 10;
 
 
-		BallType kulkiPlaceholder[][] = viewInfo.getAfterExplosionTable();
+		BallType kulkiPlaceholder[][] = viewInfo.getNewTable();
 
 		for (int j = 0; j < getHeight() / newBallHeight; j++)
 			for (int i = 0; i < getWidth() / newBallWidth; i++) {
@@ -139,6 +139,14 @@ public class PanelGame extends JPanel implements MouseListener,
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 
+	}
+	
+	// Cofanie! (Tylko 1 ruch!)
+	public void undoMovement()
+	{
+		map.undoMovement();
+		viewInfo.getNewTable();
+		repaint();
 	}
 
 }
