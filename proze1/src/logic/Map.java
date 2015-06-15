@@ -13,10 +13,12 @@ public class Map {
 	private ArrayList<Line> verticalLines, horizontalLines;
 	private ViewInfo viewInfo;
 	private int sizeX, sizeY;
-	private int punkty = 0;
+	private int punkty;
+	private int punktyOld;
 	private Config config = new Config("config.txt");
 	
 	public Map(int sizeX, int sizeY) {
+		punkty = punktyOld = 0;
 		this.sizeX = sizeX;
 		this.sizeY = sizeY;
 		verticalLines = new ArrayList<Line>();
@@ -208,6 +210,7 @@ public class Map {
 	public void undoMovement()
 	{
 		loadFromInfoTable(viewInfo.getOldTable());
+		punkty = punktyOld;
 	}
 
 	private void update(ArrayList<GameBall> destroyedBalls) {
@@ -257,6 +260,7 @@ public class Map {
 				dodatkowePunkty = (dodatkowePunkty + config.getPunktyZaWybuch()* (mnoznik));
 				mnoznik = 1 + (count/(8.0));
 			}
+			punktyOld = punkty;
 			punkty = punkty + (int)dodatkowePunkty;
 			System.out.println(punkty + "\n\n");
 			return true;

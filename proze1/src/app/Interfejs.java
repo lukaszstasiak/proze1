@@ -176,4 +176,9 @@ public class Interfejs extends JFrame {
 	public void undoButtonPressed() {
 		panelGry.undoMovement();
 	}
+	
+	public void updatePoints()
+	{
+		panelWyniku.setWynik(panelGry.getMap().getPunkty());
+	}
 }

@@ -19,13 +19,16 @@ public class RightGamePanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private int wynik;
 	private String nazwa;
-
+	JTextArea textArea;
+	
 	public int getWynik() {
 		return wynik;
 	}
 
 	public void setWynik(int wynik) {
 		this.wynik = wynik;
+		textArea.setText("Wynik:\n" + nazwa + ":\t" + wynik);
+		
 	}
 
 	public String getNazwa() {
@@ -88,7 +91,7 @@ public class RightGamePanel extends JPanel {
 		gbc_undoButton.gridy = 1;
 		panel.add(undoButton, gbc_undoButton);
 		
-		JTextArea textArea = new JTextArea();
+		textArea = new JTextArea();
 		GridBagConstraints gbc_textArea = new GridBagConstraints();
 		gbc_textArea.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textArea.gridx = 0;
