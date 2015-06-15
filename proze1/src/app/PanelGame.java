@@ -133,9 +133,6 @@ public class PanelGame extends JPanel implements MouseListener, RefreshInterface
 			int distance = calcDistance(destroyed, normal)*newBallHeight;
 			//calculate passed distance by animProgress
 			int passedDistance = (int) (distance*animProgress);
-			System.out.println("PassedDistance: " + passedDistance);
-			System.out.println("Normal: " + normal);
-			System.out.println("Destroyed: " + destroyed);
 			//draw
 			if(normal != 10)
 			for(int i=0;i<destroyed+1;i++)
@@ -149,7 +146,7 @@ public class PanelGame extends JPanel implements MouseListener, RefreshInterface
 
 		}
 		
-		animProgress += 0.01;
+		animProgress += 0.03;
 		if(animProgress >= 1.0f)
 		{
 			animationInProgress = false;

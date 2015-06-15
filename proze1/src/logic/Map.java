@@ -131,9 +131,8 @@ public class Map {
 
 		set.addAll(temp);
 		temp.clear();
-
+		
 		destroyedBalls.addAll(set);
-		System.out.println(punkty + "\n\n");
 		return destroyedBalls;
 	}
 
@@ -144,18 +143,13 @@ public class Map {
 	private void markDestroyedBalls(ArrayList<GameBall> destroyedBalls) {
 		for (Line line : horizontalLines) {
 			ArrayList<GameBall> balls = line.getBalls();
-			int zdobytePunkty = 0;
-			int count = 1;
 			for (GameBall ball : balls) {
 				
 				if (destroyedBalls.contains(ball)) {
 					ball.setBallType(BallType.DESTROYED);
 
-					zdobytePunkty = zdobytePunkty + (config.getPunktyZaWybuch()*(1+ (count/6)));
 				}
-				count++;
 			}
-			punkty = punkty + (int) Math.round(zdobytePunkty);
 		}
 
 		/*
@@ -255,6 +249,16 @@ public class Map {
 		} else {
 			System.out.println("Not empty?! :C");
 			update(destroyedBalls);
+			int count = 0;
+			double mnoznik = 1 + (count/(8.0));
+			double  dodatkowePunkty = 0;
+			for (GameBall ball : destroyedBalls) {
+				count++;
+				dodatkowePunkty = (dodatkowePunkty + config.getPunktyZaWybuch()* (mnoznik));
+				mnoznik = 1 + (count/(8.0));
+			}
+			punkty = punkty + (int)dodatkowePunkty;
+			System.out.println(punkty + "\n\n");
 			return true;
 		}
 	}

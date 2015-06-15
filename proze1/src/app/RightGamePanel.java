@@ -8,7 +8,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.JProgressBar;
 import javax.swing.JTextArea;
 
 
@@ -18,12 +17,29 @@ public class RightGamePanel extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+	private int wynik;
+	private String nazwa;
+
+	public int getWynik() {
+		return wynik;
+	}
+
+	public void setWynik(int wynik) {
+		this.wynik = wynik;
+	}
+
+	public String getNazwa() {
+		return nazwa;
+	}
+
+	public void setNazwa(String nazwa) {
+		this.nazwa = nazwa;
+	}
 
 	/**
 	 * Create the panel.
 	 */
-	public RightGamePanel(int wynik, String nazwa) {
+	public RightGamePanel() {
 		setLayout(new GridLayout(0, 1, 0, 0));
 		
 		JPanel panel = new JPanel();
@@ -72,20 +88,13 @@ public class RightGamePanel extends JPanel {
 		gbc_undoButton.gridy = 1;
 		panel.add(undoButton, gbc_undoButton);
 		
-		JProgressBar progressBar = new JProgressBar();
-		GridBagConstraints gbc_progressBar = new GridBagConstraints();
-		gbc_progressBar.insets = new Insets(0, 0, 5, 0);
-		gbc_progressBar.gridx = 0;
-		gbc_progressBar.gridy = 2;
-		panel.add(progressBar, gbc_progressBar);
-		
 		JTextArea textArea = new JTextArea();
 		GridBagConstraints gbc_textArea = new GridBagConstraints();
 		gbc_textArea.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textArea.gridx = 0;
 		gbc_textArea.gridy = 3;
 		panel.add(textArea, gbc_textArea);
-		textArea.append("Wynik:\n" + nazwa+ ":\t" + wynik);
+		textArea.append("Wynik:\n" + nazwa + ":\t" + wynik);
 
 	}
 	

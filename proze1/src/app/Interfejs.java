@@ -1,4 +1,5 @@
 package app;
+
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -21,15 +22,11 @@ public class Interfejs extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private String nazwaUzytkownika;
-	
+
 	private JPanel contentPane;
 	public static BufferedImage image;
-	//private Board board;
-	//private Map map;
-	
 	private PanelGame panelGry;
 	private RightGamePanel panelWyniku;
-	
 	private Score obecnyWynik;
 
 	public static void main(String[] args) {
@@ -90,14 +87,17 @@ public class Interfejs extends JFrame {
 				getContentPane().setLayout(new BorderLayout());
 				setBounds(100, 100, 600, 500);
 				setResizable(true);
-				
+
 				// podzielenie okna na dwa panele
 				JSplitPane jsp = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
 				jsp.setDividerSize(0);
-				
+
 				panelGry = new PanelGame();
-				panelWyniku = new RightGamePanel(panelGry.getMap().getPunkty(), nazwaUzytkownika);
-				
+				panelWyniku = new RightGamePanel();
+
+				panelWyniku.setNazwa(nazwaUzytkownika);
+				panelWyniku.setWynik(panelGry.getMap().getPunkty());
+
 				jsp.add(panelGry);
 				jsp.add(panelWyniku);
 				jsp.setResizeWeight(0.8);
@@ -105,12 +105,11 @@ public class Interfejs extends JFrame {
 				getContentPane().addNotify();
 				setVisible(true);
 				setLocationRelativeTo(null);
-				
-				
+
 			}
-			
+
 		});
-		
+
 		// /////////////////////// Wywoluje sie okno dialogowe
 		// "Please enter your name" ////////////////////////////////
 
@@ -173,9 +172,8 @@ public class Interfejs extends JFrame {
 	public Score getObecnyWynik() {
 		return obecnyWynik;
 	}
-	
-	public void undoButtonPressed()
-	{
+
+	public void undoButtonPressed() {
 		panelGry.undoMovement();
 	}
 }
