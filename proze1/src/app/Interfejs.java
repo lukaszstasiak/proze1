@@ -1,8 +1,7 @@
+package app;
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,20 +15,21 @@ import javax.swing.JSplitPane;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
-public class Interfejs extends JFrame {
+import logic.Map;
 
+public class Interfejs extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String nazwaUzytkownika;
+	
 	private JPanel contentPane;
 	public static BufferedImage image;
-	private Board board;
-
-	public String getNazwaUzytkownika() {
-		return nazwaUzytkownika;
-	}
-
-	public void setNazwaUzytkownika(String nazwaUzytkownika) {
-		this.nazwaUzytkownika = nazwaUzytkownika;
-	}
+//	private Board board;
+	private Map map;
+	
+	private Score obecnyWynik;
 
 	public static void main(String[] args) {
 
@@ -93,33 +93,19 @@ public class Interfejs extends JFrame {
 				// podzielenie okna na dwa panele
 				JSplitPane jsp = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
 				jsp.setDividerSize(0);
-				jsp.add(new PanelGame());
-				jsp.add(new RightGamePanel());
+				
+				PanelGame panelGry = new PanelGame();
+				RightGamePanel panelWyniku = new RightGamePanel(panelGry.getMap().getPunkty(), nazwaUzytkownika);
+				
+				jsp.add(panelGry);
+				jsp.add(panelWyniku);
 				jsp.setResizeWeight(0.8);
 				getContentPane().add(jsp);
 				getContentPane().addNotify();
 				setVisible(true);
 				setLocationRelativeTo(null);
 				
-
 				
-//				
-//				getContentPane().removeAll(); 
-//				getContentPane().setLayout(new FlowLayout());
-//				FlowLayout layout = new FlowLayout();
-//				setLayout(layout);
-//				layout.setAlignment(FlowLayout.LEADING);
-//				layout.layoutContainer(getContentPane());
-//				setBounds(100, 100, 600, 500);
-//				setResizable(true);
-//				
-//				getContentPane().add(new PanelGame());
-//				getContentPane().add(new RightGamePanel());
-//
-//				setVisible(true);
-//				setLocationRelativeTo(null);
-//				
-
 			}
 			
 		});
@@ -130,8 +116,7 @@ public class Interfejs extends JFrame {
 		btnGraj.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent a) {
 				PodajNazweUzytkownikaFrame okno = new PodajNazweUzytkownikaFrame();
-				setNazwaUzytkownika(okno.getUzytkownik());
-
+				nazwaUzytkownika = okno.getUzytkownik();
 			}
 		});
 
@@ -182,5 +167,9 @@ public class Interfejs extends JFrame {
 			}
 		});
 
+	}
+
+	public Score getObecnyWynik() {
+		return obecnyWynik;
 	}
 }

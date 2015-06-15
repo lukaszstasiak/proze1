@@ -1,3 +1,4 @@
+package app;
 public class Score {
 	
 	private final int points;

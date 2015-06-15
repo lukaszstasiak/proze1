@@ -1,19 +1,17 @@
-import javax.swing.JPanel;
-
-import java.awt.GridBagLayout;
-
-import javax.swing.JButton;
-
+package app;
 import java.awt.GridBagConstraints;
-
-import javax.swing.JList;
-
+import java.awt.GridBagLayout;
 import java.awt.Insets;
 
-import javax.swing.JCheckBox;
+import javax.swing.JPanel;
 
 
 public class dsd extends JPanel {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Create the panel.
@@ -33,7 +31,7 @@ public class dsd extends JPanel {
 		gbc_panelGame.gridy = 0;
 		add(panelGame, gbc_panelGame);
 		
-		RightGamePanel rightGamePanel = new RightGamePanel();
+		RightGamePanel rightGamePanel = new RightGamePanel(10, "Japko");
 		GridBagConstraints gbc_rightGamePanel = new GridBagConstraints();
 		gbc_rightGamePanel.gridx = 1;
 		gbc_rightGamePanel.gridy = 0;

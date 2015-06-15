@@ -1,3 +1,4 @@
+package app;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -17,11 +18,12 @@ public class RightGamePanel extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
 
 	/**
 	 * Create the panel.
 	 */
-	public RightGamePanel() {
+	public RightGamePanel(int wynik, String nazwa) {
 		setLayout(new GridLayout(0, 1, 0, 0));
 		
 		JPanel panel = new JPanel();
@@ -66,9 +68,8 @@ public class RightGamePanel extends JPanel {
 		gbc_textArea.gridx = 0;
 		gbc_textArea.gridy = 2;
 		panel.add(textArea, gbc_textArea);
-		textArea.append("Wynik: ");
-	
+		textArea.append("Wynik:\n" + nazwa+ ":\t" + wynik);
 
 	}
-
+	
 }

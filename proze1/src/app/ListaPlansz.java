@@ -1,3 +1,4 @@
+package app;
 import java.util.Scanner;
 
 /**
@@ -105,7 +106,6 @@ public class ListaPlansz {
 		private final int punktyZaWybuch;
 		public final static String boardLimiter = "=====";
 
-
 		/**
 		 * Zapamietuje skaner z ktorego bedzie wczytywac level.
 		 * 
@@ -125,14 +125,14 @@ public class ListaPlansz {
 		 * 
 		 * @return plansza stworzona na podstawie odczytanych danych.
 		 */
-		public ListaPlansz getNextBoard() {
-			int np = skaner.nextInt();
-			int lr = skaner.nextInt();
-			long cnp = skaner.nextLong() * 1000;
-			int wlp = skaner.nextInt();;
-
-			return new ListaPlansz(np, lr, cnp, wlp, this.punktyZaWybuch);
-		}
+//		public ListaPlansz getNextBoard() {
+//			int np = skaner.nextInt();
+//			int lr = skaner.nextInt();
+//			long cnp = skaner.nextLong() * 1000;
+//			int wlp = skaner.nextInt();;
+//
+//			return new ListaPlansz(np, lr, cnp, wlp, this.punktyZaWybuch);
+//		}
 
 
 	}

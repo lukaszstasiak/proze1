@@ -1,3 +1,4 @@
+package app;
 import info.BallType;
 
 import java.awt.image.BufferedImage;
