@@ -1,3 +1,4 @@
+package aplikacja;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -34,7 +35,7 @@ public class RightGamePanel extends JPanel {
 		panel.setLayout(gbl_panel);
 		
 		
-		//przcisk COFNIJ dzia³ajacy tak, ze kasuje dany Interfejs i tworzy go od nowa 
+		//przcisk COFNIJ dziaï¿½ajacy tak, ze kasuje dany Interfejs i tworzy go od nowa 
 		JButton btnNewButton = new JButton("COFNIJ");
 		btnNewButton.addActionListener(new ActionListener()
 		{

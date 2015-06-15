@@ -1,3 +1,4 @@
+package aplikacja;
 import java.io.Serializable;
 
 

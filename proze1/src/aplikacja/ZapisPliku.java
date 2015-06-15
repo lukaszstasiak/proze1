@@ -1,3 +1,4 @@
+package aplikacja;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -13,7 +14,7 @@ public class ZapisPliku {
 			List<Wyniki> wyniki = new ArrayList<>();
 		
 
-		wyniki.add(new Wyniki("£ukasz", 100));
+		wyniki.add(new Wyniki("ï¿½ukasz", 100));
 		wyniki.add(new Wyniki("Kasia", 510));
 		wyniki.add(new Wyniki("Janek", 52));
 		wyniki.add(new Wyniki("Zosia", 1090));

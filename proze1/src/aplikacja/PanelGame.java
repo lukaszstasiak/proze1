@@ -1,3 +1,4 @@
+package aplikacja;
 import info.BallType;
 import info.ViewInfo;
 

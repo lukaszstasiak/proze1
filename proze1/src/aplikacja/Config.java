@@ -1,10 +1,11 @@
+package aplikacja;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Vector;
 
-import ListaPlansz.WczytajListePlansz;
+import aplikacja.ListaPlansz.WczytajListePlansz;
 
 
 /**

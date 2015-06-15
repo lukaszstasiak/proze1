@@ -1,3 +1,4 @@
+package aplikacja;
 import javax.swing.JPanel;
 
 import java.awt.GridBagLayout;

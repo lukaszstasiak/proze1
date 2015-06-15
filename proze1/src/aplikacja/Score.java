@@ -1,3 +1,4 @@
+package aplikacja;
 public class Score {
 	
 	private final int points;
@@ -5,7 +6,7 @@ public class Score {
 	
 	/**
 	 * Tworzy Wynik z parametrami.
-	 * @param points  - liczba punktów.
+	 * @param points  - liczba punktï¿½w.
 	 * @param playerNick - nick gracza.
 	 */
 	public Score (int points, String playerNick) {
@@ -14,8 +15,8 @@ public class Score {
 	}
 
 	/**
-	 * Zwraca liczbe punktów.
-	 * @return liczba punktów.
+	 * Zwraca liczbe punktï¿½w.
+	 * @return liczba punktï¿½w.
 	 */
 	public int getPoints() {
 		return points;

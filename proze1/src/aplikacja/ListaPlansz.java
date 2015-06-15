@@ -1,3 +1,4 @@
+package aplikacja;
 import java.util.Scanner;
 
 /**
@@ -60,18 +61,18 @@ public class ListaPlansz {
 	
 	
 	/**
-	 * Zwraca po³o¿enie platform.
+	 * Zwraca poï¿½oï¿½enie platform.
 	 * 
-	 * @return po³o¿enie platform.
+	 * @return poï¿½oï¿½enie platform.
 	 */
 	public int getLiczbaRuchow() {
 		return liczbaRuchow;
 	}
 
 	/**
-	 * Zwraca czas na przejœcie.
+	 * Zwraca czas na przejï¿½cie.
 	 * 
-	 * @return czas na przejœcie.
+	 * @return czas na przejï¿½cie.
 	 */
 	public long getCzasNaPrzejscie() {
 		return czasNaPrzejscie;
@@ -88,7 +89,7 @@ public class ListaPlansz {
 	}
 	
 	/**
-	 * Wczytuje dane planszy z pliku. Ustawia proporcje i rozdzielczoœæ planszy.
+	 * Wczytuje dane planszy z pliku. Ustawia proporcje i rozdzielczoï¿½ï¿½ planszy.
 	 * 
 	 * @author Maurycy
 	 *
