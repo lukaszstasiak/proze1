@@ -11,38 +11,36 @@ import javax.imageio.ImageIO;
 public class Ball {
 
 	private BufferedImage img = null;
-
+	private static BufferedImage red;
+	private static BufferedImage green;
+	private static BufferedImage blue;
+	private static BufferedImage yellow;
+	
+	// Static init block
+	static {
+	try {
+		red = ImageIO.read(new File("reddot.jpg"));
+		green = ImageIO.read(new File("greendot.jpg"));
+		blue = ImageIO.read(new File("yellowdot.jpg"));
+		yellow = ImageIO.read(new File("bluedot.jpg"));
+		}
+		catch (IOException e) {
+		}
+	}
 	Ball(BallType ballType) {
 
 		switch (ballType) {
 		case RED:
-			try {
-				img = ImageIO.read(new File(
-						"reddot.jpg"));
-			} catch (IOException e) {
-			}
+			img = red;
 			break;
 		case GREEN:
-
-			try {
-				img = ImageIO.read(new File(
-						"greendot.jpg"));
-			} catch (IOException e) {
-			}
+			img = green;
 			break;
 		case YELLOW:
-			try {
-				img = ImageIO.read(new File(
-						"yellowdot.jpg"));
-			} catch (IOException e) {
-			}
+			img = yellow;
 			break;
 		case BLUE:
-			try {
-				img = ImageIO.read(new File(
-						"bluedot.jpg"));
-			} catch (IOException e) {
-			}
+			img = blue;
 		case DESTROYED:
 			break;
 		}

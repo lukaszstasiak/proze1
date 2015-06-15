@@ -15,8 +15,6 @@ import javax.swing.JSplitPane;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
-import logic.Map;
-
 public class Interfejs extends JFrame {
 	/**
 	 * 

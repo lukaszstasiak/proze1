@@ -9,7 +9,6 @@ import java.util.Random;
 public class Line
 {
 	private ArrayList<GameBall> balls;
-
 	
 	public Line()
 	{
