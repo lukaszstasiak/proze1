@@ -49,7 +49,7 @@ public class PanelGame extends JPanel implements MouseListener, RefreshInterface
 		} catch (IOException e) {
 			System.out.println("Image not found");
 		}
-
+		
 	}
 
 	public Map getMap() {

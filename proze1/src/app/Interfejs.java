@@ -106,6 +106,9 @@ public class Interfejs extends JFrame {
 				getContentPane().addNotify();
 				setVisible(true);
 				setLocationRelativeTo(null);
+				if (panelWyniku.getLicznikRuchow() == 0){
+					KoniecGryFrame kgf = new KoniecGryFrame();
+				}
 				
 			}
 

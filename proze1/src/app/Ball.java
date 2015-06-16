@@ -8,7 +8,7 @@ import java.util.Random;
 
 import javax.imageio.ImageIO;
 
-public class Ball {
+public class Ball  {
 
 	private BufferedImage img = null;
 	private static BufferedImage red;
