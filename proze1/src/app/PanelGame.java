@@ -141,8 +141,8 @@ public class PanelGame extends JPanel implements MouseListener, MouseMotionListe
 		else
 			startAnimThread();
 		
-		//draw old table normally
-		drawTable(g, viewInfo.getAfterExplosionTable());
+		//draw part of old table - past destroyed balls
+		drawPartOfTable(g, viewInfo.getAfterExplosionTable());
 		
 		//for each column
 		for(int col=0;col<10;col++)
@@ -228,6 +228,31 @@ public class PanelGame extends JPanel implements MouseListener, MouseMotionListe
 		repaint();
 		
 	}
+	
+	private void drawPartOfTable(Graphics g, BallType[][] table)
+	{
+		int newBallHeight = getHeight() / 10;
+		int newBallWidth = getWidth() / 10;
+		
+		//find destroyed balls
+		int destroyedPos[] = new int[10];
+		for(int col=0;col<10;col++)
+		{
+			destroyedPos[col] = getDestroyed(col);
+		}
+
+		for (int j = 0; j < getHeight() / newBallHeight; j++)
+			for (int i = 0; i < getWidth() / newBallWidth; i++) 
+			{
+				if(j < destroyedPos[i]) continue;
+				if(posX1 == i && posY1 == j && dragInProgress) continue;
+				Ball ball = new Ball(table[i][j]);
+				g.drawImage(ball.getImg(), newBallWidth * i, newBallHeight * j,
+						newBallWidth * (i + 1), newBallHeight * (j + 1), 0, 0,
+						40, 40, null);
+			}
+	}
+
 	
 	private void drawTable(Graphics g, BallType[][] table)
 	{
