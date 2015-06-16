@@ -97,7 +97,8 @@ public class Interfejs extends JFrame {
 
 				panelWyniku.setNazwa(nazwaUzytkownika);
 				panelWyniku.setWynik(panelGry.getMap().getPunkty());
-
+				panelWyniku.setLicznikRuchow(panelGry.getMap().getLicznikRuchow());
+				
 				jsp.add(panelGry);
 				jsp.add(panelWyniku);
 				jsp.setResizeWeight(0.8);
@@ -105,7 +106,7 @@ public class Interfejs extends JFrame {
 				getContentPane().addNotify();
 				setVisible(true);
 				setLocationRelativeTo(null);
-
+				
 			}
 
 		});
@@ -180,5 +181,9 @@ public class Interfejs extends JFrame {
 	public void updatePoints()
 	{
 		panelWyniku.setWynik(panelGry.getMap().getPunkty());
+	}
+	public void updateMoveCount()
+	{
+		panelWyniku.setLicznikRuchow(panelGry.getMap().getLicznikRuchow());
 	}
 }

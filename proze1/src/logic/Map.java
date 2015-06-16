@@ -16,9 +16,20 @@ public class Map {
 	private int punkty;
 	private int punktyOld;
 	private Config config = new Config("config.txt");
+	private int licznikRuchow;
+	private int licznikRuchowOld;
 	
+	public int getLicznikRuchow() {
+		return licznikRuchow;
+	}
+
+	public void setLicznikRuchow(int licznikRuchow) {
+		this.licznikRuchow = licznikRuchow;
+	}
+
 	public Map(int sizeX, int sizeY) {
 		punkty = punktyOld = 0;
+		licznikRuchow = config.getLiczbaRuchow();
 		this.sizeX = sizeX;
 		this.sizeY = sizeY;
 		verticalLines = new ArrayList<Line>();
@@ -211,6 +222,7 @@ public class Map {
 	{
 		loadFromInfoTable(viewInfo.getOldTable());
 		punkty = punktyOld;
+		licznikRuchow = licznikRuchowOld;
 	}
 
 	private void update(ArrayList<GameBall> destroyedBalls) {
@@ -261,8 +273,10 @@ public class Map {
 				mnoznik = 1 + (count/(8.0));
 			}
 			punktyOld = punkty;
+			licznikRuchowOld = licznikRuchow;
 			punkty = punkty + (int)dodatkowePunkty;
 			System.out.println(punkty + "\n\n");
+			licznikRuchow--;
 			return true;
 		}
 	}

@@ -62,6 +62,8 @@ public class PanelGame extends JPanel implements MouseListener, RefreshInterface
 
 		// Update points
 		((Interfejs)getRootPane().getParent()).updatePoints();
+		// Update licznikRuchow
+		((Interfejs)getRootPane().getParent()).updateMoveCount();
 		
 		if(animationInProgress)
 		{

@@ -18,6 +18,7 @@ public class Config {
 
 	private  int liczbaZyc;
 	private  int punktyZaWybuch;
+	private int liczbaRuchow;
 	private  List<ListaPlansz> listaPoziomow;
 
 	/**
@@ -36,6 +37,7 @@ public class Config {
 			}
 			liczbaZyc = skaner.nextInt();
 			punktyZaWybuch = skaner.nextInt();
+			setLiczbaRuchow(skaner.nextInt());
 			listaPoziomow = new Vector<>();
 			skaner.next(WczytajListePlansz.boardLimiter);
 //			WczytajListePlansz listaPlansz = new WczytajListePlansz(skaner, punktyZaWybuch);
@@ -72,5 +74,17 @@ public class Config {
 	 */
 	public List<ListaPlansz> getLevelsList() {
 		return listaPoziomow;
+	}
+
+
+
+	public int getLiczbaRuchow() {
+		return liczbaRuchow;
+	}
+
+
+
+	public void setLiczbaRuchow(int liczbaRuchow) {
+		this.liczbaRuchow = liczbaRuchow;
 	}
 }

@@ -19,6 +19,7 @@ public class RightGamePanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private int wynik;
 	private String nazwa;
+	private int licznikRuchow;
 	JTextArea textArea;
 	
 	public int getWynik() {
@@ -27,7 +28,7 @@ public class RightGamePanel extends JPanel {
 
 	public void setWynik(int wynik) {
 		this.wynik = wynik;
-		textArea.setText("Wynik:\n" + nazwa + ":\t" + wynik);
+		textArea.setText("Wynik:\n" + nazwa + ":\t" + wynik );
 		
 	}
 
@@ -56,7 +57,7 @@ public class RightGamePanel extends JPanel {
 		
 		
 		//przcisk COFNIJ dzia³ajacy tak, ze kasuje dany Interfejs i tworzy go od nowa 
-		JButton btnNewButton = new JButton("Wróæ");
+		JButton btnNewButton = new JButton("Wróæ do menu");
 		btnNewButton.addActionListener(new ActionListener()
 		{
 		    public void actionPerformed(ActionEvent e)
@@ -97,8 +98,16 @@ public class RightGamePanel extends JPanel {
 		gbc_textArea.gridx = 0;
 		gbc_textArea.gridy = 3;
 		panel.add(textArea, gbc_textArea);
-		textArea.append("Wynik:\n" + nazwa + ":\t" + wynik);
+		textArea.append("Wynik:\n" + nazwa + ":\t" + wynik + "\nLiczba pozostalych ruchow:\t" + licznikRuchow);
+	}
 
+	public int getLicznikRuchow() {
+		return licznikRuchow;
+	}
+
+	public void setLicznikRuchow(int licznikRuchow) {
+		this.licznikRuchow = licznikRuchow;
+		textArea.setText("Wynik:\n" + nazwa + ":\t" + wynik + "\nLiczba ruchow:\t" + licznikRuchow);
 	}
 	
 }
