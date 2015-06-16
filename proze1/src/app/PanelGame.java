@@ -2,6 +2,7 @@ package app;
 import info.BallType;
 import info.ViewInfo;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -91,6 +92,8 @@ public class PanelGame extends JPanel implements MouseListener, MouseMotionListe
 
 	@Override
 	public void mousePressed(MouseEvent e) {
+		if(animationInProgress)
+			return;
 		int x = e.getX();
 		int y = e.getY();
 		posX1 = (int) (Math.floor(x / (getWidth() / 10)));
