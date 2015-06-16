@@ -82,7 +82,7 @@ public class PanelGame extends JPanel implements MouseListener, MouseMotionListe
 		drawTable(g, viewInfo.getNewTable());
 		if(dragInProgress)
 		{
-			Ball ball = new Ball(viewInfo.getOldTable()[posX1][posY1]);
+			Ball ball = new Ball(viewInfo.getNewTable()[posX1][posY1]);
 			g.drawImage(ball.getImg(), dragPosX - newBallWidth/2, dragPosY - newBallHeight/2,
 					dragPosX + newBallWidth/2, dragPosY + newBallHeight/2, 0, 0,
 					40, 40, null);
