@@ -8,8 +8,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 
+import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JSplitPane;
@@ -97,8 +99,8 @@ public class Interfejs extends JFrame {
 
 				panelWyniku.setNazwa(nazwaUzytkownika);
 				panelWyniku.setWynik(panelGry.getMap().getPunkty());
-				panelWyniku.setLicznikRuchow(panelGry.getMap().getLicznikRuchow());
-				
+				panelWyniku.setLicznikRuchow(panelGry.getMap()
+						.getLicznikRuchow());
 				jsp.add(panelGry);
 				jsp.add(panelWyniku);
 				jsp.setResizeWeight(0.8);
@@ -106,10 +108,7 @@ public class Interfejs extends JFrame {
 				getContentPane().addNotify();
 				setVisible(true);
 				setLocationRelativeTo(null);
-				if (panelWyniku.getLicznikRuchow() == 0){
-					KoniecGryFrame kgf = new KoniecGryFrame();
-				}
-				
+
 			}
 
 		});
@@ -180,13 +179,20 @@ public class Interfejs extends JFrame {
 	public void undoButtonPressed() {
 		panelGry.undoMovement();
 	}
-	
-	public void updatePoints()
-	{
+
+	public void updatePoints() {
 		panelWyniku.setWynik(panelGry.getMap().getPunkty());
 	}
-	public void updateMoveCount()
-	{
+
+	public void updateMoveCount() {
 		panelWyniku.setLicznikRuchow(panelGry.getMap().getLicznikRuchow());
+		if (panelGry.getMap().getLicznikRuchow() == 0) {
+			new JFrame();
+			JOptionPane.showMessageDialog(null, "TWOJ WYNIK TO:\t"
+					+ panelGry.getMap().getPunkty(), "KONIEC GRY",
+					JOptionPane.OK_CANCEL_OPTION);
+
+			setLocationRelativeTo(null);
+		}
 	}
 }

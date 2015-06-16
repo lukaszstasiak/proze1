@@ -18,7 +18,7 @@ public class Map {
 	private Config config = new Config("config.txt");
 	private int licznikRuchow;
 	private int licznikRuchowOld;
-	
+
 	public int getLicznikRuchow() {
 		return licznikRuchow;
 	}
@@ -48,6 +48,7 @@ public class Map {
 		viewInfo.setAfterExplosionTable(getInfoTable());
 		viewInfo.setNewTable(getInfoTable());
 		System.out.println(punkty + "\n\n");
+
 	}
 
 	private void updateHorizontalLines() {
@@ -115,7 +116,7 @@ public class Map {
 		System.out.println("Pion: " + x1);
 		for (GameBall b : temp) {
 			System.out.println(b.getBallType());
-			
+
 		}
 		set.addAll(temp);
 		temp.clear();
@@ -124,7 +125,7 @@ public class Map {
 		System.out.println("Pion: " + x2);
 		for (GameBall b : temp) {
 			System.out.println(b.getBallType());
-			
+
 		}
 		set.addAll(temp);
 		temp.clear();
@@ -144,7 +145,7 @@ public class Map {
 
 		set.addAll(temp);
 		temp.clear();
-		
+
 		destroyedBalls.addAll(set);
 		return destroyedBalls;
 	}
@@ -157,7 +158,7 @@ public class Map {
 		for (Line line : horizontalLines) {
 			ArrayList<GameBall> balls = line.getBalls();
 			for (GameBall ball : balls) {
-				
+
 				if (destroyedBalls.contains(ball)) {
 					ball.setBallType(BallType.DESTROYED);
 
@@ -187,29 +188,26 @@ public class Map {
 
 		return infoTable;
 	}
-	
-	private void loadFromInfoTable(BallType[][] infoTable)
-	{
+
+	private void loadFromInfoTable(BallType[][] infoTable) {
 		// Clean up
 		for (Line line : horizontalLines) {
 			line.clear();
 		}
-		
+
 		for (Line line : verticalLines) {
 			line.clear();
 		}
-		
+
 		// Load to vertical
 		int idx = 0;
-		for(Line line: verticalLines)
-		{
-			for(int i = 0; i<sizeY;i++)
-			{
+		for (Line line : verticalLines) {
+			for (int i = 0; i < sizeY; i++) {
 				line.addBall(new GameBall(infoTable[idx][i]));
 			}
 			idx++;
 		}
-		
+
 		// Update horizontal references
 		updateHorizontalLines();
 		// Reset ViewInfo data
@@ -217,9 +215,8 @@ public class Map {
 		viewInfo.setAfterExplosionTable(getInfoTable());
 		viewInfo.setNewTable(getInfoTable());
 	}
-	
-	public void undoMovement()
-	{
+
+	public void undoMovement() {
 		loadFromInfoTable(viewInfo.getOldTable());
 		punkty = punktyOld;
 		licznikRuchow = licznikRuchowOld;
@@ -265,16 +262,17 @@ public class Map {
 			System.out.println("Not empty?! :C");
 			update(destroyedBalls);
 			int count = 0;
-			double mnoznik = 1 + (count/(8.0));
-			double  dodatkowePunkty = 0;
+			double mnoznik = 1 + (count / (8.0));
+			double dodatkowePunkty = 0;
 			for (GameBall ball : destroyedBalls) {
 				count++;
-				dodatkowePunkty = (dodatkowePunkty + config.getPunktyZaWybuch()* (mnoznik));
-				mnoznik = 1 + (count/(8.0));
+				dodatkowePunkty = (dodatkowePunkty + config.getPunktyZaWybuch()
+						* (mnoznik));
+				mnoznik = 1 + (count / (8.0));
 			}
 			punktyOld = punkty;
 			licznikRuchowOld = licznikRuchow;
-			punkty = punkty + (int)dodatkowePunkty;
+			punkty = punkty + (int) dodatkowePunkty;
 			System.out.println(punkty + "\n\n");
 			licznikRuchow--;
 			return true;
