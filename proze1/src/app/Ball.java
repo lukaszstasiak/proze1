@@ -19,10 +19,10 @@ public class Ball  {
 	// Static init block
 	static {
 	try {
-		red = ImageIO.read(new File("reddot.jpg"));
-		green = ImageIO.read(new File("greendot.jpg"));
-		blue = ImageIO.read(new File("yellowdot.jpg"));
-		yellow = ImageIO.read(new File("bluedot.jpg"));
+		red = ImageIO.read(new File("reddot.png"));
+		green = ImageIO.read(new File("greendot.png"));
+		blue = ImageIO.read(new File("bluedot.png"));
+		yellow = ImageIO.read(new File("yellowdot.png"));
 		}
 		catch (IOException e) {
 		}

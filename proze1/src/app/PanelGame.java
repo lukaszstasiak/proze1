@@ -5,6 +5,7 @@ import info.ViewInfo;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -14,7 +15,7 @@ import javax.swing.JPanel;
 
 import logic.Map;
 
-public class PanelGame extends JPanel implements MouseListener, RefreshInterface
+public class PanelGame extends JPanel implements MouseListener, MouseMotionListener, RefreshInterface
 {
 
 	private static final long serialVersionUID = 1L;
@@ -33,13 +34,18 @@ public class PanelGame extends JPanel implements MouseListener, RefreshInterface
 	private boolean animationInProgress;
 	private AnimThread animThread;
 	private float animProgress;
-
+	
+	private boolean dragInProgress;
+	private int dragPosX, dragPosY;
+	
 	public PanelGame() {
+		dragInProgress = false;
 		animationInProgress = false;
 		animThread = new AnimThread(25,this);
 		animProgress = 0;
 		
 		addMouseListener(this);
+		addMouseMotionListener(this);
 		map = new Map(10, 10);
 		viewInfo = map.getViewInfo();
 		try {
@@ -59,7 +65,9 @@ public class PanelGame extends JPanel implements MouseListener, RefreshInterface
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-
+		int newBallHeight = getHeight() / 10;
+		int newBallWidth = getWidth() / 10;
+		
 		// Update points
 		((Interfejs)getRootPane().getParent()).updatePoints();
 		// Update licznikRuchow
@@ -72,6 +80,13 @@ public class PanelGame extends JPanel implements MouseListener, RefreshInterface
 		}
 
 		drawTable(g, viewInfo.getNewTable());
+		if(dragInProgress)
+		{
+			Ball ball = new Ball(viewInfo.getOldTable()[posX1][posY1]);
+			g.drawImage(ball.getImg(), dragPosX - newBallWidth/2, dragPosY - newBallHeight/2,
+					dragPosX + newBallWidth/2, dragPosY + newBallHeight/2, 0, 0,
+					40, 40, null);
+		}
 	}
 
 	@Override
@@ -80,6 +95,7 @@ public class PanelGame extends JPanel implements MouseListener, RefreshInterface
 		int y = e.getY();
 		posX1 = (int) (Math.floor(x / (getWidth() / 10)));
 		posY1 = (int) (Math.floor(y / (getHeight() / 10)));
+		dragInProgress = true;
 	}
 
 	@Override
@@ -96,6 +112,7 @@ public class PanelGame extends JPanel implements MouseListener, RefreshInterface
 		viewInfo = map.getViewInfo();
 		repaint();
 		animProgress = 0;
+		dragInProgress = false;
 	}
 
 	// Nothing to do here
@@ -201,6 +218,8 @@ public class PanelGame extends JPanel implements MouseListener, RefreshInterface
 	private void stopAnimThread()
 	{
 		animThread.stop();
+		// Fix last frame of animation
+		repaint();
 	}
 
 	@Override
@@ -219,11 +238,25 @@ public class PanelGame extends JPanel implements MouseListener, RefreshInterface
 		for (int j = 0; j < getHeight() / newBallHeight; j++)
 			for (int i = 0; i < getWidth() / newBallWidth; i++) 
 			{
-
+				if(posX1 == i && posY1 == j && dragInProgress) continue;
 				Ball ball = new Ball(table[i][j]);
 				g.drawImage(ball.getImg(), newBallWidth * i, newBallHeight * j,
 						newBallWidth * (i + 1), newBallHeight * (j + 1), 0, 0,
 						40, 40, null);
 			}
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent arg0)
+	{
+		dragPosX = arg0.getX();
+		dragPosY = arg0.getY();
+		repaint();
+		
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent arg0)
+	{
 	}
 }
